@@ -9,6 +9,7 @@ function computerPlay() {
 }
 
 function getPlayerChoice() {
+    // only problem here is if the player cancels it throws a type errer. I don't know how to stop it else at his moment.
     let playerChoice = prompt("Please enter your choice. rock, paper or scissors", '').toLowerCase();
     return choices.includes(playerChoice) ? playerChoice : getPlayerChoice();
 }
