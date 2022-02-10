@@ -19,31 +19,27 @@ function playRound(playerSelection, computerSelection) {
     const winLose = ['You Win!', 'You Lose!']
     const beats = ['Paper beats Rock.', 'Rock beats Scissors.', 'Scissors beats Paper.']
 
-    if (playerSelection == 'rock' && computerSelection == 'scissors') {
-        playerScore += 1;
-        return `${winLose[0]} ${beats[1]}`
-    } else if (playerSelection == 'paper' && computerSelection == 'rock') {
-        playerScore += 1;
-        return `${winLose[0]} ${beats[0]}`
-    } else if (playerSelection == 'scissors' && computerSelection == 'paper') {
-        playerScore += 1;
-        return `${winLose[0]} ${beats[2]}`
-    } else if (playerSelection == 'rock' && computerSelection == 'paper') {
-        computerScore += 1;
-        return `${winLose[1]} ${beats[0]}`
-    } else if (playerSelection == 'paper' && computerSelection == 'scissors') {
-        computerScore += 1;
-        return `${winLose[1]} ${beats[2]}`
-    } else if (playerSelection == 'scissors' && computerSelection == 'rock') {
-        computerScore += 1;
-        return `${winLose[1]} ${beats[1]}`
+    player = playerSelection[0].toUpperCase() + playerSelection.slice(1)
+    computer = computerSelection[0].toUpperCase() + computerSelection.slice(1)
+
+    if (playerSelection == 'rock' && computerSelection == 'scissors' ||
+        playerSelection == 'paper' && computerSelection == 'rock' ||
+        playerSelection == 'scissors' && computerSelection == 'paper') {
+        playerScore++;
+        return `${player} beats ${computer}`
+    } else if (playerSelection == 'rock' && computerSelection == 'paper' ||
+        playerSelection == 'paper' && computerSelection == 'scissors' ||
+        playerSelection == 'scissors' && computerSelection == 'rock') {
+        computerScore++;
+        return `${computer} beats ${player}`
     } else {
-        draws += 1;
+        draws++;
         return "It's a draw!"
     }
 }
 
 function game() {
+    
     for (let i = 0; i < 5; i++) {
         console.log(playRound(getPlayerChoice(), computerPlay()));
         console.log(`In round ${i+1} the score is:`)
@@ -51,10 +47,11 @@ function game() {
         console.log(`Computer: ${computerScore}`)
         console.log(`Draws: ${draws}`)
     }
+
     if (playerScore > computerScore) {
-        console.log('Congratulations! You won the hole game!');
+        console.log('Congratulations! You won the game!');
     } else if (playerScore < computerScore) {
-        console.log('What a pity! You lost the hole game!');
+        console.log('What a pity! You lost the game!');
     } else {
         console.log("Well it's a draw!")
     }
